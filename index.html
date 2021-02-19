@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+
+<body>
+
+    <canvas id="myCanvas" width="100" name="some" eight="100"></canvas>
+    <button id="sendToSever">Send</button>
+    <!-- <form action="/test" enctype="multipart/form-data" method="POST">
+        <input type="file" name="filename" />
+        <input type="submit" />
+    </form> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.font = "30px Arial";
+        ctx.strokeText("Hello World", 10, 50);
+
+        document.getElementById("sendToSever").addEventListener("click", function() {
+            $.ajax({
+                type: 'post',
+                url: 'http://localhost:3000/test',
+                data: {
+                    'canvas': JSON.stringify(canvas.toDataURL())
+                },
+                success: function(e) {
+                    console.log("Sent!");
+                }
+            })
+        })
+    </script>
+
+</body>
+
+</html>
